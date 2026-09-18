@@ -21,8 +21,8 @@ gem "jbuilder"
 # haml rails
 gem "haml-rails"
 
-gem "bootstrap", "~> 5.3.0"
-
+gem "bootstrap"
+gem "dartsass-rails"
 
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
