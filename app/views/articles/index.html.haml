@@ -1,24 +1,66 @@
-%h1 Articles#index
-%p Find me in app/views/articles/index.html.erb
-/ Button trigger modal
-%button.btn.btn-primary{"data-bs-target" => "#exampleModal", "data-bs-toggle" => "modal", type: "button"}
-  Launch demo modal
-/ Modal
-#exampleModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", tabindex: "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %h1#exampleModalLabel.modal-title.fs-5 Modal title
-        %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button"}
-      .modal-body
-        \...
-      .modal-footer
-        %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"} Close
-        %button.btn.btn-primary{type: "button"} Save changes
+.container.py-5
+/ Cabeçalho
+.d-flex.justify-content-between.align-items-center.mb-5
+%div
+%h1.fw-bold.mb-1 Artigos
+%p.text-muted.mb-0 Confira as últimas publicações do blog.
 
-        .card{style: "width: 18rem;"}
-  %img.card-img-top{alt: "...", src: "..."}/
-  .card-body
-    %h5.card-title Card title
-    %p.card-text Some quick example text to build on the card title and make up the bulk of the card’s content.
-    %a.btn.btn-primary{href: "#"} Go somewhere
+
+%button.btn.btn-primary{"data-bs-target" => "#newArticleModal", "data-bs-toggle" => "modal", type: "button"}
+  %i.bi.bi-plus-lg.me-1
+  Novo artigo
+
+
+/ Lista de artigos
+.row.g-4
+- @articles.each do |article|
+.col-md-6.col-lg-4
+.card.h-100.shadow-sm.border-0
+.card-body.d-flex.flex-column
+%h5.card-title.fw-bold
+= article.title
+
+
+  %p.card-text.text-muted
+    = truncate(article.content, length: 150)
+
+  .mt-auto.pt-3
+    .d-flex.justify-content-between.align-items-center
+      %small.text-muted
+        = article.created_at.strftime("%d/%m/%Y")
+
+      = link_to "Ler artigo", article_path(article), class: "btn btn-outline-primary btn-sm"
+
+/ Mensagem caso não existam artigos
+
+- if @articles.empty?
+  .text-center.py-5
+    %i.bi.bi-journal-text.fs-1.text-muted
+    %h4.mt-3 Nenhum artigo encontrado
+    %p.text-muted Seja o primeiro a publicar um artigo!
+
+    %button.btn.btn-primary{"data-bs-target" => "#newArticleModal", "data-bs-toggle" => "modal", type: "button"}
+      Criar primeiro artigo
+
+/ Modal para novo artigo
+#newArticleModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "newArticleModalLabel", tabindex: "-1"}
+.modal-dialog.modal-lg
+.modal-content
+.modal-header
+%h1#newArticleModalLabel.modal-title.fs-5 Novo artigo
+%button.btn-close{"aria-label" => "Fechar", "data-bs-dismiss" => "modal", type: "button"}
+
+  .modal-body
+    = form_with model: Article.new, local: true do |form|
+      .mb-3
+        = form.label :title, "Título", class: "form-label"
+        = form.text_field :title, class: "form-control", placeholder: "Digite o título do artigo"
+
+      .mb-3
+        = form.label :content, "Conteúdo", class: "form-label"
+        = form.text_area :content, rows: 8, class: "form-control", placeholder: "Escreva o conteúdo do artigo..."
+
+      .modal-footer.px-0.pb-0
+        %button.btn.btn-secondary{"data-bs-dismiss" => "modal", type: "button"}
+          Cancelar
+        = form.submit "Publicar artigo", class: "btn btn-primary"
