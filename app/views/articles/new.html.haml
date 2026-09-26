@@ -1,0 +1,16 @@
+%h1
+Novo artigo
+
+= form_with model: @article, local: true do |form|
+%div
+= form.label :title
+= form.text_field :title
+
+%div
+= form.label :content
+= form.text_area :content
+
+%div
+= form.submit "Publicar artigo"
+
+= link_to "Voltar", articles_path
