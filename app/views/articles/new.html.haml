@@ -1,16 +1,27 @@
-%h1
-Novo artigo
+.container
+  .row
+    .col-lg-8
+      .card
+        .card-body
+          %h1
+            = form_with model: @article, local: true do |form|
+              - if @article.errors.any?
+                .alert.alert-danger
+                  %h5.mb-2 Não foi possível publicar o artigo
 
-= form_with model: @article, local: true do |form|
-%div
-= form.label :title
-= form.text_field :title
+                  %ul.mb-0
+                    - @article.errors.full_messages.each do |message|
+                      %li= message
 
-%div
-= form.label :content
-= form.text_area :content
+              .mb-3
+                = form.label :title, "Título", class: "form-label"
+                = form.text_field :title, class: "form-control", placeholder: "Digite o título do artigo"
 
-%div
-= form.submit "Publicar artigo"
+              .mb-3
+                = form.label :content, "Conteúdo", class: "form-label"
+                = form.text_area :content, rows: 10, class: "form-control", placeholder: "Escreva o conteúdo do artigo..."
 
-= link_to "Voltar", articles_path
+              .d-flex.justify-content-between
+                = link_to "Voltar", articles_path, class: "btn btn-outline-secondary"
+                = form.submit "Publicar artigo", class: "btn btn-primary"
+

@@ -4,6 +4,9 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Make code changes take effect immediately without server restart.
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
   config.enable_reloading = true
 
   # Do not eager load code on boot.
