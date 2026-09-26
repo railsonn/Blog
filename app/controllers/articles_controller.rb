@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   end
 
   def new 
-    article = Article.new
+    @article = Article.new
   end
 
   def show
@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
+    @article = Article.new(article_params.merge(user_id: current_user.id))
 
     if @article.save
       redirect_to @article
