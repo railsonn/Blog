@@ -1,0 +1,18 @@
+.container.py-5
+  .row.justify-content-center
+    .col-lg-8
+      .card.shadow-sm.border-0
+        .card-body.p-4
+          %h1.fw-bold
+            = @article.title
+
+          %p.text-muted
+            = @article.created_at.strftime("%d/%m/%Y")
+
+          %hr
+
+          %p
+            = @article.content
+
+          .mt-4
+            = link_to "Ler artigo", article_path(@article), class: "btn btn-primary"
