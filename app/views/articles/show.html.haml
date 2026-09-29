@@ -14,5 +14,18 @@
           %p
             = @article.content
 
-          .mt-4
-            = link_to "Ler artigo", article_path(@article), class: "btn btn-primary"
+          .mt-4.d-flex.gap-2
+            = link_to "Voltar", articles_path, class: "btn btn-outline-secondary"
+
+            = link_to "#comentarios", class: "btn btn-primary" do
+              %i.bi.bi-chat-left-text.me-2
+              Comentar
+
+          %hr.mt-5
+
+          #comentarios
+            %h4.fw-bold.mb-3
+              Comentários
+
+            %p.text-muted
+              Ainda não há comentários.
