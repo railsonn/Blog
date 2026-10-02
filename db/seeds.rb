@@ -9,9 +9,16 @@
 #   end
 
 
+user = User.create!(
+  name: "Admin User",
+  email: "admim@gmail.com",
+  password: "123456",
+)
 
 20.times do 
   Article.new(
-    
-  )
+    title: Faker::Book.title,
+    content: Faker::Lorem.paragraph(sentence_count: 10),  
+    user_id: user.id
+  ).save!
 end
