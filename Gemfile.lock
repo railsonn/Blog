@@ -122,6 +122,8 @@ GEM
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    faker (2.23.0)
+      i18n (>= 1.8.11, < 2)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -440,6 +442,7 @@ DEPENDENCIES
   dartsass-rails
   debug
   devise (~> 4.8)
+  faker (~> 2.20)
   haml-rails
   importmap-rails
   jbuilder

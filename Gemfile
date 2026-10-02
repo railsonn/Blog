@@ -21,6 +21,8 @@ gem "jbuilder"
 # haml rails
 gem "haml-rails"
 
+gem 'faker', '~> 2.20'
+
 gem "bootstrap"
 gem "dartsass-rails"
 
