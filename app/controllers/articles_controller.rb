@@ -23,9 +23,10 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
+
     if @article.destroy
-      redirect_to articles_path
-    else 
+      redirect_to articles_path, notice: "Artigo excluído com sucesso."
+    else
       render :show, status: :unprocessable_entity
     end
   end

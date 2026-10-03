@@ -20,10 +20,12 @@
             = link_to new_comment_path(current_user), class: "btn btn-primary" do
               %i.bi.bi-chat-left-text.me-2
               Comentar
-              
-            = link_to user_path(current_user), data: { turbo_method: :delete, turbo_confirm: "Tem certeza que deseja excluir sua conta?" }, class: "btn btn-danger" do
-              %i.bi.bi-trash.me-2
-              Excluir
+
+            = button_to "Excluir",
+              article_path(@article),
+              method: :delete,
+              class: "btn btn-danger",
+              data: { turbo_confirm: "Tem certeza que deseja excluir este artigo?" }
 
           %hr.mt-5
 
